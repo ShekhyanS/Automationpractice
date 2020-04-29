@@ -85,7 +85,7 @@ public class UserWishlistPage extends BasePage {
 
     public void deleteWishlist(){
         deleteWishlist.click();
-        driver.switchTo().alert().accept();
+        acceptAlert();
     }
 
 }

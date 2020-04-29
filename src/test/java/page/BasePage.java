@@ -1,12 +1,11 @@
 package page;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -52,9 +51,22 @@ public abstract class BasePage {
         element.sendKeys(text);
     }
 
+    public String getWebElementText(WebElement element){
+        return element.getText().trim();
+    }
+
     public boolean waitForElementBePresent(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
         return wait.until(ExpectedConditions.not(ExpectedConditions.invisibilityOf(element)));
+    }
+
+    public boolean isWebElementPresentByText(String xpath, String text){
+        try{
+            xpathFormator(xpath, text);
+            return true;
+        }catch (NotFoundException e){
+            return false;
+        }
     }
 
     public void scrollPage(String scrollValue){
@@ -73,5 +85,19 @@ public abstract class BasePage {
             }
         }
     }
+
+    public void selectDropdownOption(WebElement dropdown, String dropdownOption){
+        new Select(dropdown).selectByVisibleText(dropdownOption);
+    }
+
+    public WebElement xpathFormator(String xpath, String xpathVariableValue) {
+        return driver.findElement(By.xpath(String.format(xpath, xpathVariableValue)));
+    }
+
+    public void acceptAlert(){
+        driver.switchTo().alert().accept();
+    }
+
+
 }
 

@@ -1,28 +1,21 @@
 package test;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.*;
 
 public class AddToCartTest extends BaseTest {
 
-    HomePage homePage;
-    UserAuthenticationPage userAuthenticationPage;
-    UserAccountPage userAccountPage;
-    ShoppingCartPage shoppingCartPage;
+    private ShoppingCartPage shoppingCartPage;
+
+    @BeforeMethod
+    public void setup() {
+        shoppingCartPage = new ShoppingCartPage(driver);
+    }
 
     @Test
     public void addItemsToCartDeleteAndCheckoutTest() {
-        homePage = new HomePage(driver);
-        userAuthenticationPage = new UserAuthenticationPage(driver);
-        userAccountPage = new UserAccountPage(driver);
-        shoppingCartPage = new ShoppingCartPage(driver);
-
-        homePage.openPage();
-        homePage.clickSignIn();
-        userAuthenticationPage.enterEmailAddress("lusinepapyan05@gmail.com");
-        userAuthenticationPage.enterPassword("lusinePapyan");
-        userAuthenticationPage.clickSubmitButton();
         userAccountPage.enterSearchTerm("Printed Summer Dress");
         userAccountPage.clickSearchSubmitButton();
         userAccountPage.addSearchResultProductsToCart();
