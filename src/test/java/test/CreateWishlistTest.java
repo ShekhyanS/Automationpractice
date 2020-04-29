@@ -1,31 +1,24 @@
 package test;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.*;
 
 public class CreateWishlistTest extends BaseTest {
 
-    HomePage homePage;
-    UserAuthenticationPage userAuthenticationPage;
-    UserAccountPage userAccountPage;
     UserWishlistPage userWishlistPage;
     ProductPage productPage;
 
-    @Test
-    public void createWishlistAndAddItemsTest() {
-        homePage = new HomePage(driver);
-        userAuthenticationPage = new UserAuthenticationPage(driver);
-        userAccountPage = new UserAccountPage(driver);
+    @BeforeMethod
+    public void setup() {
         userWishlistPage = new UserWishlistPage(driver);
         productPage = new ProductPage(driver);
+    }
 
 
-        homePage.openPage();
-        homePage.clickSignIn();
-        userAuthenticationPage.enterEmailAddress("lusinepapyan05@gmail.com");
-        userAuthenticationPage.enterPassword("lusinePapyan");
-        userAuthenticationPage.clickSubmitButton();
+    @Test
+    public void createWishlistAndAddItemsTest() {
         userAccountPage.clickMyWishlist();
         userWishlistPage.enterWishlistName();
         userWishlistPage.clickSaveWishlistButton();

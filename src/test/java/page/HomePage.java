@@ -1,8 +1,6 @@
 package page;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage{
    protected static final String CURRENT_PAGE_URL ="/index.php";

@@ -3,20 +3,38 @@ package test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import page.HomePage;
+import page.UserAccountPage;
+import page.UserAuthenticationPage;
 
 public class BaseTest {
     protected WebDriver driver;
+    protected HomePage homePage;
+    protected UserAuthenticationPage userAuthenticationPage;
+    protected UserAccountPage userAccountPage;
 
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup(){
+    @BeforeTest(alwaysRun = true)
+    public void browserSetup() {
         driver = new ChromeDriver();
-
     }
 
-    @AfterMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
+    public void accountLogin(){
+        homePage = new HomePage(driver);
+        userAuthenticationPage = new UserAuthenticationPage(driver);
+        userAccountPage = new UserAccountPage(driver);
+        homePage.openPage();
+        homePage.clickSignIn();
+        userAuthenticationPage.enterEmailAddress("lusinepapyan05@gmail.com");
+        userAuthenticationPage.enterPassword("lusinePapyan");
+        userAuthenticationPage.clickSubmitButton();
+    }
+
+    @AfterTest(alwaysRun = true)
     public void browserTearDown() throws InterruptedException {
-//        Thread.sleep(5000);
 //        driver.quit();
 //        driver = null;
     }

@@ -37,12 +37,12 @@ public class ShoppingCartPage extends BasePage{
     }
 
     public void deleteItemFromCart(String skuValue) {
-        driver.findElement(By.xpath(String.format(itemDeleteIcon, skuValue))).click();
-    }
+       xpathFormator(itemDeleteIcon, skuValue).click();
+   }
 
     public String getItemTotalPrice(String skuValue) {
-        return driver.findElement(By.xpath(String.format(itemTotalPrice, skuValue))).getText();
-    }
+       return xpathFormator(itemTotalPrice, skuValue).getText();
+   }
 
     public String getCartTotalPrice() {
         waitForElementBePresent(cartTotalPrice);

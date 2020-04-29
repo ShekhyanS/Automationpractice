@@ -27,6 +27,10 @@ public class UserAccountPage extends BasePage {
     private WebElement closePopupIcon;
     @FindBy(xpath = "//*[@class='shopping_cart']/a")
     private WebElement shoppingCartButton;
+    @FindBy(xpath = "//a[contains(@href,'controller=addresses')]")
+    private WebElement myAddressLink;
+    @FindBy(xpath = "//a[contains(@href,'controller=history')]")
+    private WebElement orderHistoryAndDetailsLink;
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
@@ -71,6 +75,16 @@ public class UserAccountPage extends BasePage {
     public void openShoppingCart() {
         waitForElementBePresent(shoppingCartButton);
         shoppingCartButton.click();
+    }
+
+    public void clickMyAddress(){
+        waitForElementBePresent(myAddressLink);
+        myAddressLink.click();
+    }
+
+    public void clickOrderHistoryAndDetails(){
+        waitForElementBePresent(orderHistoryAndDetailsLink);
+        orderHistoryAndDetailsLink.click();
     }
 
 }
