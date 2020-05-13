@@ -4,6 +4,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -15,6 +16,7 @@ import page.UserAuthenticationPage;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -22,14 +24,16 @@ public class BaseTest {
     protected UserAuthenticationPage userAuthenticationPage;
     protected UserAccountPage userAccountPage;
 
-    ChromeOptions options;
+    protected ChromeOptions options;
 
 
     @BeforeTest(alwaysRun = true)
     public void browserSetup() throws MalformedURLException {
-        //driver = new ChromeDriver();
         options= new ChromeOptions();
         options.addArguments("start-maximized");
+
+       // driver = new ChromeDriver(options);
+
         options.setCapability("platformName", Platform.WINDOWS);
         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
     }
@@ -48,8 +52,8 @@ public class BaseTest {
 
     @AfterTest(alwaysRun = true)
     public void browserTearDown() throws InterruptedException {
-//        driver.quit();
-//        driver = null;
+        driver.quit();
+        driver = null;
     }
 
 }
