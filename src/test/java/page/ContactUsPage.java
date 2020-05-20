@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import java.io.File;
 import java.io.IOException;
 
+import static util.WebElementActionsUtil.*;
+
 public class ContactUsPage extends BasePage {
     protected static final String CURRENT_PAGE_URL = "/index.php?controller=contact";
 

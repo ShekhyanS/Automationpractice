@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static util.WebElementActionsUtil.*;
+
 public class AddressPage extends BasePage{
    protected static final String CURRENT_PAGE_URL ="/index.php";
 

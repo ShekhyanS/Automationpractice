@@ -1,9 +1,12 @@
 package page;
 
+import model.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import test.BaseTest;
+
+import static util.WebElementActionsUtil.*;
 
 public class UserAuthenticationPage extends BasePage {
 
@@ -36,6 +39,13 @@ public class UserAuthenticationPage extends BasePage {
 
     public void clickSubmitButton(){
        sbmitButton.click();
+    }
+
+    public void login(User user){
+        enterEmailAddress(user.getUsername());
+        enterPassword(user.getPassword());
+        clickSubmitButton();
+
     }
 
 
