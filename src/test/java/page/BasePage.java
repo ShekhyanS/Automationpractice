@@ -1,19 +1,19 @@
 package page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static util.WebElementActionsUtil.*;
 
 
 public abstract class BasePage {
-    protected WebDriver driver;
-    protected final int WAIT_TIMEOUT_SECONDS = 10;
+    private final Logger LOGGER = LogManager.getLogger(BasePage.class.getName());
     public static final String BASE_URL = "http://automationpractice.com";
-
+    protected WebDriver driver;
     @FindBy(className = "login")
     private WebElement signIn;
     @FindBy(className = "logout")
@@ -30,74 +30,56 @@ public abstract class BasePage {
         return BASE_URL + currentPageUrl();
     }
 
-    public void openPage(){
+    public void openPage() {
         driver.get(getPageFullUrl());
     }
 
-    public void clickSignIn(){
+    public void clickSignIn() {
         signIn.click();
     }
 
-    public void clickLogout(){
+    public void clickLogout() {
         logout.click();
     }
 
-    public boolean userIsSignedOut(){
+    public boolean userIsSignedOut() {
         return waitForElementBePresent(signIn);
     }
 
-    public void enterText(WebElement element, String text){
-        element.click();
-        element.sendKeys(text);
+
+    public void mouseMoveClick(WebElement element) {
+        Actions action = new Actions(driver);
+        action.click(element).build().perform();
+
     }
 
-    public String getWebElementText(WebElement element){
-        return element.getText().trim();
+    public  void acceptAlert() {
+        driver.switchTo().alert().accept();
     }
 
-    public boolean waitForElementBePresent(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return wait.until(ExpectedConditions.not(ExpectedConditions.invisibilityOf(element)));
-    }
-
-    public boolean isWebElementPresentByText(String xpath, String text){
-        try{
+    public  boolean isWebElementPresentByText(String xpath, String text) {
+        try {
             xpathFormator(xpath, text);
             return true;
-        }catch (NotFoundException e){
+        } catch (NotFoundException e) {
             return false;
         }
     }
 
-    public void scrollPage(String scrollValue){
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-        jse.executeScript("window.scrollBy(0,"+ scrollValue + " )");
-    }
-
-    public void setChecked(WebElement element, boolean checked){
-        if(element.isSelected()){
-            if(!checked){
-                element.click();
-            }
-        } else {
-            if(checked){
-                element.click();
-            }
-        }
-    }
-
-    public void selectDropdownOption(WebElement dropdown, String dropdownOption){
-        new Select(dropdown).selectByVisibleText(dropdownOption);
-    }
-
-    public WebElement xpathFormator(String xpath, String xpathVariableValue) {
+    public  WebElement xpathFormator(String xpath, String xpathVariableValue) {
         return driver.findElement(By.xpath(String.format(xpath, xpathVariableValue)));
     }
 
-    public void acceptAlert(){
-        driver.switchTo().alert().accept();
+    public void performEnter(WebElement element) {
+        Actions action = new Actions(driver);
+        action.sendKeys(element, Keys.RETURN).build().perform();
+
     }
 
+    public  void jsClick(WebElement element){
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
 
 }
 

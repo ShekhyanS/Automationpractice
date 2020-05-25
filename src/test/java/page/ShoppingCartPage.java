@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static util.WebElementActionsUtil.*;
+
 public class ShoppingCartPage extends BasePage{
    protected static final String CURRENT_PAGE_URL ="/index.php?controller=order";
 

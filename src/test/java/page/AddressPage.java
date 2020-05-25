@@ -1,16 +1,15 @@
 package page;
 
 
-import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import static util.WebElementActionsUtil.*;
 
 public class AddressPage extends BasePage{
    protected static final String CURRENT_PAGE_URL ="/index.php";
 
     private String  addressNameElement = "//*[text()='Secondary Address']/../..//*[@class='address_name' and contains(text(),'%s')]";
-    private String  addressCompanyElement = "//*[text()='Secondary Address']/../..//*[@class='address_company' and contains(text(),'%s')]";
     private String  addressFirstRowElement = "//*[text()='Secondary Address']/../..//*[@class='address_address1' and contains(text(),'%s')]";
     private String  addressSecondRowElement = "//*[text()='Secondary Address']/../..//*[@class='address_address2' and contains(text(),'%s')]";
     private String  addressCountryAttributes = "//*[text()='Secondary Address']/../..//span[contains(text(),'%s')]";
@@ -160,7 +159,8 @@ public class AddressPage extends BasePage{
     }
 
     public boolean isCompanyNameOnPage(String text){
-       return isWebElementPresentByText(addressCompanyElement, text);
+        String addressCompanyElement = "//*[text()='Secondary Address']/../..//*[@class='address_company' and contains(text(),'%s')]";
+        return isWebElementPresentByText(addressCompanyElement, text);
     }
 
     public boolean isFirstAddressOnPage(String text){

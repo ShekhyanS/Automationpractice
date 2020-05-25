@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static util.WebElementActionsUtil.*;
+
 public class UserAccountPage extends BasePage {
     protected static final String CURRENT_PAGE_URL = "/index.php?controller=my-account";
 
@@ -30,6 +32,8 @@ public class UserAccountPage extends BasePage {
     private WebElement myAddressLink;
     @FindBy(xpath = "//a[contains(@href,'controller=history')]")
     private WebElement orderHistoryAndDetailsLink;
+    @FindBy(xpath = "//*[@id='contact-link']/a")
+    private WebElement contactusLink;
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
@@ -76,14 +80,19 @@ public class UserAccountPage extends BasePage {
         shoppingCartButton.click();
     }
 
-    public void clickMyAddress(){
+    public void clickMyAddress() {
         waitForElementBePresent(myAddressLink);
         myAddressLink.click();
     }
 
-    public void clickOrderHistoryAndDetails(){
+    public void clickOrderHistoryAndDetails() {
         waitForElementBePresent(orderHistoryAndDetailsLink);
         orderHistoryAndDetailsLink.click();
     }
 
+    public void clickContactUsLink() {
+        waitForElementBePresent(contactusLink);
+        mouseMoveClick(contactusLink);
+
+    }
 }
