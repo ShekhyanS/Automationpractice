@@ -5,10 +5,9 @@
     <test name="Smoke Tests">
         <classes>
             <class name="test.SignInTest"/>
-            <class name="test.SignOutTest"/>
+<!--            <class name="test.SignOutTest"/>-->
         </classes>
     </test>
 
 </suite>
 
-g

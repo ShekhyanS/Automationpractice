@@ -12,12 +12,22 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import page.BasePage;
 
+import java.net.MalformedURLException;
+
 import static driver.DriverSingletone.getDriver;
 
 public class WebElementActionsUtil {
     protected static final int WAIT_TIMEOUT_SECONDS = 20;
     private static final Logger LOGGER = LogManager.getLogger(WebElementActionsUtil.class.getName());
-    private static WebDriver driver = getDriver();
+    private static WebDriver driver;
+
+    static {
+        try {
+            driver = getDriver();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void setChecked(WebElement element, boolean checked) {
         LOGGER.info("Turning checkbox on.");

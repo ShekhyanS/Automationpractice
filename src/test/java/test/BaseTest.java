@@ -26,7 +26,7 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void accountLogin() throws MalformedURLException {
-        driver = initiateDriver();
+        driver = getDriver();
         User testUser = new UserCreator().userWithCredentials();
         homePage = new HomePage(driver);
         userAuthenticationPage = new UserAuthenticationPage(driver);
