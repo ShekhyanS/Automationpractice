@@ -28,7 +28,7 @@ public class ViewOrdersSteps {
 
     }
 
-    @And("^the user clicks (.*) button$")
+    @And("^the user clicks (.*) option")
     public void clickOrderHistoryAndDetailsButton(String name) {
         userAccountPage.clickOrderHistoryAndDetails();
 
