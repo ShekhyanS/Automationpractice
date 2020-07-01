@@ -7,11 +7,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 import static util.WebElementActionsUtil.*;
 
 
 public abstract class BasePage {
-    private final Logger LOGGER = LogManager.getLogger(BasePage.class.getName());
+   // private final Logger LOGGER = LogManager.getLogger(BasePage.class.getName());
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(BasePage.class);
     public static final String BASE_URL = "http://automationpractice.com";
     protected WebDriver driver;
     @FindBy(className = "login")
@@ -31,10 +33,12 @@ public abstract class BasePage {
     }
 
     public void openPage() {
+        logger.info("Open page:" + getClass());
         driver.get(getPageFullUrl());
     }
 
     public void clickSignIn() {
+        logger.info("Click sign in option");
         signIn.click();
     }
 
