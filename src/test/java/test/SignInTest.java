@@ -2,10 +2,6 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.BasePage;
-import page.HomePage;
-import page.UserAccountPage;
-import page.UserAuthenticationPage;
 
 public class SignInTest extends BaseTest {
 
