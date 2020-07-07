@@ -2,6 +2,9 @@
 
 
 <suite name="Suite2"  thread-count="3">
+    <listeners>
+        <listener class-name="listener.SuiteListener"/>
+    </listeners>
     <test name="Smoke Tests">
         <classes>
             <class name="test.SignInTest"/>
